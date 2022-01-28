@@ -25,4 +25,8 @@ export namespace Error {
 		std::string return_str = "error: open failed, file: ";
 		return return_str + file;
 	}
+	std::string writing_to_file( const int fd, const std::string& file ) {
+		std::string return_str = "error: writing to file with fd: ";
+		return return_str + std::to_string( fd ) + " and sentence: " + file;
+	}
 };

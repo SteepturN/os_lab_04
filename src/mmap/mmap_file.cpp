@@ -13,21 +13,27 @@ import explicit_enum;
 
 export namespace Mmap {
 	enum {
-		dont_have_fd,
+		dont_have_fd = -1,
 	};
 	template<typename T>
 	void get_mapped_area( int& fd, const int mapping_length, T*& mapped_area ) {
 		const char sentence[] = "fucking fuck stupid feature";
 		const char directory_for_tmp_file[] = ".";
 		if( fd == Mmap::dont_have_fd ) {
-			fd = open( directory_for_tmp_file, O_TMPFILE | O_RDWR, O_TMPFILE | S_IRWXU );
-			write( fd, sentence, sizeof( sentence ) ); // Why I should do this WTF
+			fd = open( directory_for_tmp_file, O_TMPFILE | O_RDWR,
+			           O_TMPFILE | S_IRWXU );
 			if( fd == ReturnValue::open_fail ) {
 				std::string filename = "temporary file in directory";
-				std::cerr << Error::opening_file( filename + directory_for_tmp_file );
+				std::cerr << Error::opening_file( filename +
+				                                  directory_for_tmp_file );
 				exit( ReturnValue::error_opening_file );
 			}
-													   // otherwise I get Ошибка шины (стек памяти сброшен на диск)
+			if( write( fd, sentence, sizeof( sentence ) ) ==
+			    ReturnValue::write_fail ) { // Why I should do this WTF
+				std::cerr <<                // otherwise I get Ошибка шины (стек памяти сброшен на диск)
+					Error::writing_to_file( fd, std::string( sentence ) );
+				exit( ReturnValue::error_writing_to_file );
+			}
 		}
 
 		// if( fd == 0 ) {

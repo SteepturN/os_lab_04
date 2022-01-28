@@ -14,7 +14,7 @@ int main( int argc, char** argv ) {
 	const int mapping_length = 100;
 	int* mapped_area = nullptr;
 	if( argc != 3 ) //name, ptr, ptr_mask
-		return ReturnValue::not_enough_args;
+		return ReturnValue::error_not_enough_args;
 	ExecArg::get_execve_arg< int >( fd, argv );
 
 	std::fstream file( "numbers.ans", std::ios::trunc | std::ios::out );

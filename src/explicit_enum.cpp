@@ -9,11 +9,9 @@ export namespace StandardValue {
 export namespace ReturnValue {
 	enum standard {
 	    nice = 0,
-		not_enough_args,
 	};
     enum exec {
 	    bad_exec = -1,
-		error_executing_program = -2,
 	};
     enum mmap {
 		mmap_failed,
@@ -21,14 +19,22 @@ export namespace ReturnValue {
     enum fork {
 		bad_fork = -1,
 		fork_child_program = 0,
-		error_forking_process = -2,
 	};
 	enum kill {
 		bad_kill = -1,
 	};
 	enum open {
 		open_fail = -1,
-		error_opening_file = -2,
+	};
+	enum write {
+		write_fail = -1,
+	};
+	enum error {
+	   error_executing_program = 1,
+	   error_forking_process,
+	   error_opening_file,
+	   error_not_enough_args,
+	   error_writing_to_file,
 	};
 };
 export namespace MmapValue {

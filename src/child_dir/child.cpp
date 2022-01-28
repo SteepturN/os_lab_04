@@ -12,7 +12,7 @@ import signal_handler;
 int main( int argc, char** argv ) {
 	int* mmaped_area;
 	if( argc != 3 ) //name, ptr, ptr_mask
-		return ReturnValue::not_enough_args;
+		return ReturnValue::error_not_enough_args;
 	ExecArg::get_execve_arg<int*>( mmaped_area, argv );
 
 	std::fstream file( "numbers.ans", std::ios::trunc | std::ios::out );
