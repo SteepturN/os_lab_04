@@ -13,7 +13,7 @@ export namespace ExecArg {
 	void make_execve_arg( T pointer, std::string& pathname,
 							char**& exec_arg ) {
 		std::allocator< char > alloc_ch;
-		std::cout << "making pointer: |" << pointer << "|\n";
+		// std::cout << "making pointer: |" << pointer << "|\n";
 		const int exec_arg_count = 4; //name, pointer, mask, null
 		char* pointer_arg = alloc_ch.allocate( 2 * ( sizeof( T ) + sizeof( '\0' ) ) );
 		const int mask_offset = sizeof( T ) + sizeof( '\0' );
@@ -100,7 +100,7 @@ export namespace ExecArg {
 			}
 		}
 		pointer = *reinterpret_cast< T* >( pointer_raw );
-		std::cout << "have got pointer: |" << pointer << "|\n";
+		// std::cout << "have got pointer: |" << pointer << "|\n";
 	    // std::cout << "pointer intptr_t: " << pointer_raw << '\n';
 	}
 };
